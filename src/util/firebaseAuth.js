@@ -21,26 +21,19 @@ module.exports = {
             return id
         }
     })},
-    sendMove: (authState, roomCode, requestedMove) => {firebase.database().ref('games').orderByChild('code').equalTo(roomCode).on("value", (snapshot) => {
-        let id
-        if(snapshot && snapshot.val()){
-            snapshot.forEach(function(data) {
-                id = data.key
-            })
+    sendMove: (authState, roomCode, requestedMove) => {
+        firebase.database().ref('games').orderByChild('code').equalTo(roomCode).limitToFirst(1).once('value', data => {
+            const gameId = Object.keys(data.val())[0]
+            if(data.val()[gameId].player_state && data.val()[gameId].player_state[authState.uid] && data.val()[gameId].player_state[authState.uid].current_position){
+                const state = data.val()[gameId].player_state[authState.uid]
 
-            firebase.database().ref('games/' + id + '/player_state/' + authState.uid + '/current_position/').once('value').then(value => {
-                console.log(value)
-            })
-            return id
-            /* 
-                TODO: Send move request to appropriate spot; unsure if I should be creating entries, or if we should have host do that 
+                requestedMove.x += state.current_position.x
+                requestedMove.y += state.current_position.y
+            }
 
-                authState -> whole authState object
-                roomCode -> 4-digit room code
-                requested move -> requested move in the form of the amount to add to the x and y position. for instance, {x: 1, y: -1}
-            */
-        }
-    })},
+            firebase.database().ref('games/' + gameId + '/player_state/' + authState.uid + '/requested_position').set(requestedMove)
+        })
+    },
         
 	registerStateListener: async handler => firebase.auth().onAuthStateChanged(handler),
 }
