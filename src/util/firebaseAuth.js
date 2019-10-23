@@ -28,7 +28,7 @@ module.exports = {
                 const state = data.val()[gameId].player_state[authState.uid]
 
                 requestedMove.x += state.current_position.x
-                requestedMove.y += state.current_position.y
+                requestedMove.y -= state.current_position.y
             }
 
             firebase.database().ref('games/' + gameId + '/player_state/' + authState.uid + '/requested_position').set(requestedMove)
