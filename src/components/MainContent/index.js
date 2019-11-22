@@ -10,9 +10,6 @@ class MainContent extends Component {
     render() {
         const {authState} = this.props
 
-        if(!authState){
-            return <Redirect to='/login' />
-        }
         return (
                 <div className='MainContent'>
                 <Switch>

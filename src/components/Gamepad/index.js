@@ -11,7 +11,7 @@ export class Gamepad extends Component {
         let path = this.props.location.pathname
         let requestedMove = {}
         requestedMove.x = element.x
-        requestedMove.y = element.y
+        requestedMove.y = element.y*-1
         sendMove(authState, path.substring(path.length - 4, path.length), requestedMove)
     }
 

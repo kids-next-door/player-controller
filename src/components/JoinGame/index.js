@@ -25,6 +25,9 @@ export class JoinGame extends Component {
     }
 
     render() {
+        if (!this.props.authState) {
+            return <Redirect to='/login' />
+        }
 
         if(this.state.redirectTo && this.props.authState){
             return <Redirect to={this.state.redirectTo}/>
