@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import { joinRoom } from '../../util/firebaseAuth'
 import './index.css'
+
+let { joinRoom } = require('../../util/firebaseAuth')
+// import { joinRoom } from '../../util/firebaseAuth'
 
 export class JoinGame extends Component {
     constructor(props) {

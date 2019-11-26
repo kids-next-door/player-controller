@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { sendMove } from '../../util/firebaseAuth'
 import './index.css'
+let { sendMove } = require('../../util/firebaseAuth')
 
 // Gamepad is just the actual I/O d-pad in the center of the player controller screen
 // Arrow color: #F3AB0A

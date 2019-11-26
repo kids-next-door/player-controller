@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {login, loginAnonymously} from '../../util/firebaseAuth';
 import { Redirect } from 'react-router-dom'
 import './index.css'
+let { login, loginAnonymously } = require('../../util/firebaseAuth')
 
 export class Login extends Component {
     
