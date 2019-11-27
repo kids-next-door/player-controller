@@ -8,8 +8,9 @@ let { sendMove } = require('../../util/firebaseAuth')
 export class Gamepad extends Component {
     roomCode;
 
-    componentDidMount() {
+    componentWillMount() {
         const path = this.props.location.pathname
+        console.log(path)
         this.roomCode = path.substring(path.length - 4, path.length)
     }
     
