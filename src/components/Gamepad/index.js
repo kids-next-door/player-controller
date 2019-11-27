@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
 import './index.css'
-let { sendMove } = require('../../util/firebaseAuth')
 
+const firebase = require('../../util/config-firebase')
+const sendMove = (authState, roomCode, requestedMove) => {
+    firebase.database().ref('games').orderByChild('code').equalTo(roomCode).limitToFirst(1).once('value', data => {
+        const gameId = Object.keys(data.val())[0]
+        if (data.val()[gameId].player_state && data.val()[gameId].player_state[authState.uid] && data.val()[gameId].player_state[authState.uid].current_position) {
+            const state = data.val()[gameId].player_state[authState.uid]
+            requestedMove.x += state.current_position.x
+            requestedMove.y += state.current_position.y
+        }
+
+        firebase.database().ref('games/' + gameId + '/player_state/' + authState.uid + '/requested_position').set(requestedMove)
+    })
+}
 // Gamepad is just the actual I/O d-pad in the center of the player controller screen
 // Arrow color: #F3AB0A
 

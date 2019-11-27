@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import './index.css'
-let { login, loginAnonymously } = require('../../util/firebaseAuth')
 
+const firebase = require('../../util/config-firebase')
+const login = async (email, password) => await firebase.auth().signInWithEmailAndPassword(email, password)
+const loginAnonymously = () => firebase.auth().signInAnonymously()
 export class Login extends Component {
     
     constructor(props) {

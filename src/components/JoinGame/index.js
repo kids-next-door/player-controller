@@ -2,8 +2,18 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import './index.css'
 
-let { joinRoom } = require('../../util/firebaseAuth')
-// import { joinRoom } from '../../util/firebaseAuth'
+const firebase = require('../../util/config-firebase')
+const joinRoom = (authState, displayName, roomCode) => {firebase.database().ref('games').orderByChild('code').equalTo(roomCode).on("value", (snapshot) => {
+    let id
+    if (snapshot && snapshot.val()) {
+        snapshot.forEach(function (data) {
+            id = data.key
+        })
+
+        firebase.database().ref('games/' + id + '/connected_players/' + authState.uid).set({ name: displayName })
+        return id
+    }
+})}
 
 export class JoinGame extends Component {
     constructor(props) {

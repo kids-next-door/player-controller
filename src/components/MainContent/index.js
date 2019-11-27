@@ -14,13 +14,13 @@ class MainContent extends Component {
                 <div className='MainContent'>
                 <Switch>
                     <Route path='/login'>
-                        <Login authState={this.props.authState}/>
+                        <Login authState={authState}/>
                     </Route>
 
                     <Route path='/game/:id' render={(props) => <Gamepad { ...{...props, ...this.props} }/>} />
 
                     <Route path='/'>
-                        <JoinGame authState={this.props.authState}/>
+                        <JoinGame authState={authState}/>
                     </Route>
                 </Switch>
                 </div>            
