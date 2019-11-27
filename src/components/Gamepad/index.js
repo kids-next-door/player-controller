@@ -50,7 +50,7 @@ export class Gamepad extends Component {
 
     render() {
         const arrowElems = this.arrows.map( (element, i) => {
-           return (<div key={i} className='directionButton' onTouchStart="" onClick={element.direction !== undefined ? () => {this.sendMove(element)} : null}>
+           return (<div key={i} className={element.angle !== undefined ? 'directionButton clickable' : 'directionButton'} onTouchStart="" onClick={element.direction !== undefined ? () => {this.sendMove(element)} : null}>
                 {element.angle !== undefined ? <img src='/arrow-right-solid.svg' alt='d-pad button' style={{transform: `rotate(${element.angle}deg)`}}/> : null}
             </div>)
         });

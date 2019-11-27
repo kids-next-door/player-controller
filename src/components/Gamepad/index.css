@@ -23,7 +23,7 @@
     -webkit-touch-callout: none; /* prevent save options when tapping and holding on image */
 }
 
-.directionButton:active {
+.clickable:active {
   background-color: #0C6497;
 }
 
