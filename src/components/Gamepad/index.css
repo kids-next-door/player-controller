@@ -1,23 +1,29 @@
-.Gamepad {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    align-content: flex-end;
-    justify-content: space-around;
+.gamepadWrapper {
     height: 100%;
     width: 100%;
-    max-width: 500px;
-    min-width: 300px;
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Gamepad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5em;
+    height: 75%;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 .directionButton {
-    display: flex;
-    flex-direction: row;
-    flex-basis: 33.333%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+    background-color: #ffffff6b;
+    border-radius: 1em;
+    -webkit-user-select: none; /* prevent save options when tapping and holding on image */
+    -webkit-touch-callout: none; /* prevent save options when tapping and holding on image */
+}
 
+.directionButton:active {
+  background-color: #0C6497;
 }
 

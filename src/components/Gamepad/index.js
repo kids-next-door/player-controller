@@ -6,13 +6,20 @@ let { sendMove } = require('../../util/firebaseAuth')
 // Arrow color: #F3AB0A
 
 export class Gamepad extends Component {
+    roomCode;
+
+    componentDidMount() {
+        const path = this.props.location.pathname
+        this.roomCode = path.substring(path.length - 4, path.length)
+    }
+    
+
     sendMove = (element = null) => {
         const {authState} = this.props
-        let path = this.props.location.pathname
         let requestedMove = {}
         requestedMove.x = element.x
         requestedMove.y = element.y*-1
-        sendMove(authState, path.substring(path.length - 4, path.length), requestedMove)
+        sendMove(authState, this.roomCode, requestedMove)
     }
 
     arrows = [
@@ -30,14 +37,17 @@ export class Gamepad extends Component {
 
     render() {
         const arrowElems = this.arrows.map( (element, i) => {
-           return (<div key={i} className='directionButton' onClick={element.direction !== undefined ? () => {this.sendMove(element)} : null}>
-                {element.angle !== undefined ? <img src='/arrow-right-solid.svg' alt='d-pad button' style={{transform: `rotate(${element.angle}deg)`}}/> : <h3>Maze Runners</h3>}
+           return (<div key={i} className='directionButton' onTouchStart="" onClick={element.direction !== undefined ? () => {this.sendMove(element)} : null}>
+                {element.angle !== undefined ? <img src='/arrow-right-solid.svg' alt='d-pad button' style={{transform: `rotate(${element.angle}deg)`}}/> : null}
             </div>)
         });
-        return (
+        return (<div className='gamepadWrapper'>
+            <h2>Room Code: {this.roomCode}</h2>
+            
             <div className='Gamepad'>
                 {arrowElems}
             </div>
+        </div>
         )
     }
 
