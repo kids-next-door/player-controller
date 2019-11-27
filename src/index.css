@@ -20,6 +20,7 @@ html, body, #root {
 
 html, body {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 body {
   position: relative;
@@ -29,8 +30,9 @@ button {
   background-color: #F3AB0A;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.75em;
   height: 100%;
+  font-size: 1em;
 }
 
 input[type=text], input[type=password] {
@@ -38,4 +40,5 @@ input[type=text], input[type=password] {
   height: 2em;
   width: 100%;
   border: 1px solid grey;
+  font-size: 1em;
 }

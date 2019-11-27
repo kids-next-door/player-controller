@@ -47,7 +47,7 @@ export class JoinGame extends Component {
                     <input type="text" placeholder="Enter Room Code" name="roomCode" onChange={this.handleRoomCodeChange} value={this.state.roomCode} required/>
                 </div>
                 
-                <div className='buttonsContainer'>
+                <div className='loginButtonsContainer'>
                     <button type='submit' onClick={this.handleSubmit}>Join</button>
                 </div>
             </div>
